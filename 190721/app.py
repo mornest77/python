@@ -1,24 +1,24 @@
-import json
+import json  
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_admin import Admin
-from flask_admin.contrib.sqla import ModelView
+from flask_sqlalchemy import SQLAlchemy  
+from flask_admin import Admin            
+from flask_admin.contrib.sqla import ModelView  
 from datetime import datetime
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\WINDOWS\\TEMP\\test.db'
+app = Flask(__name__)     
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///C:\\WINDOWS\\TEMP\\test.db' #設在temp,以便可以開關機清除
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
-app.config['SECRET_KEY'] = '123'
+app.config['SECRET_KEY'] = '123'     
 db = SQLAlchemy(app)
 admin = Admin(app, name='test', template_mode='bootstrap3')
 
 
-@app.route('/user/post/')
+@app.route('/user/post/')     
 def hello():
-    user = User.query.first()
-    post_dict = []
-    print(user.posts)
+    user = User.query.first()   
+    post_dict = []              
+    print(user.posts)           
     for post in user.posts:
         d = {
             '標題': post.title,
@@ -39,7 +39,7 @@ def create():
     
     post = Post(title, body, category, user.id)
     db.session.add(post)
-    try:
+    try:                     
         db.session.commit()
     except Exception as e:
         db.session.rollback()
@@ -107,7 +107,7 @@ if __name__ == '__main__':
     app.run(debug=True)
 
 
-@app.shell_context_processor
+@app.shell_context_processor    
 def make_shell_context():
     return dict(
         app=app,
