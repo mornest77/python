@@ -26,9 +26,9 @@ GET /ntub/course
 
 ```json
 {
-  "course_id": String,
-  "course_name": 程式設計,
-  "department_name": 資管,
+  "course_id": "String",
+  "course_name": "程式設計",
+  "department_name": "資管",
   "department_number": 4,
   "grade": 1,
   "class_number": 4,
